@@ -19,13 +19,12 @@ class BurpExtender(IBurpExtender, IHttpListener):
   def processHttpMessage(self, tool, is_request, content):
     if is_request:
       return
-    headers, body = self.getResponseHeadersAndBody(content)
-
+      
+    if self.getResponseHeadersAndBody(content) is not None:
     # modify body
     body = body.replace(" the Cloud", " my Butt")
     body = body.replace(" the cloud", " my butt")
     body = body.replace(" Cloud", " Butt")
     body = body.replace(" cloud", " butt")
-
     new_message = self._helpers.buildHttpMessage(headers, body)
     content.setResponse(new_message)
