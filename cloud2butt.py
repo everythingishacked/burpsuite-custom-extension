@@ -21,10 +21,11 @@ class BurpExtender(IBurpExtender, IHttpListener):
       return
       
     if self.getResponseHeadersAndBody(content) is not None:
+      headers, body = self.getResponseHeadersAndBody(content)
     # modify body
-    body = body.replace(" the Cloud", " my Butt")
-    body = body.replace(" the cloud", " my butt")
-    body = body.replace(" Cloud", " Butt")
-    body = body.replace(" cloud", " butt")
-    new_message = self._helpers.buildHttpMessage(headers, body)
-    content.setResponse(new_message)
+      body = body.replace(" the Cloud", " my Butt")
+      body = body.replace(" the cloud", " my butt")
+      body = body.replace(" Cloud", " Butt")
+      body = body.replace(" cloud", " butt")
+      new_message = self._helpers.buildHttpMessage(headers, body)
+      content.setResponse(new_message)
