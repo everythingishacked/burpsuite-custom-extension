@@ -12,7 +12,7 @@ class BurpExtender(IBurpExtender, IHttpListener):
   def getResponseHeadersAndBody(self, content):
     response = content.getResponse()
     response_data = self._helpers.analyzeResponse(response)
-    headers = list(response_data.getHeaders())
+    headers = list(response_data.getHeaders() or '')
     body = response[response_data.getBodyOffset():].tostring()
     return headers, body
 
